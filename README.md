@@ -16,8 +16,6 @@ To see it work:
    change, runs `npm test`, and opens a **draft PR** linked to your issue —
    review and merge.
 
-No CI config, no bot to run, no tokens in your repo.
-
 ## How it knows which agent to run
 
 Routing is by **trigger**, not by name: the agent watching this repo subscribes
