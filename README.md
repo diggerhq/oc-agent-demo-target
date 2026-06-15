@@ -16,13 +16,6 @@ To see it work:
    change, runs `npm test`, and opens a **draft PR** linked to your issue —
    review and merge.
 
-## How it knows which agent to run
-
-Routing is by **trigger**, not by name: the agent watching this repo subscribes
-to `issue.labeled:agent`, so adding the `agent` label is what invokes it. If you
-connected several agents, you'd give them distinct labels (say `agent` and
-`review`) so each responds only to its own.
-
 ## The agents
 
 The agents are defined as code — a little `opencomputer.toml` + a prompt — in the
