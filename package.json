@@ -1,0 +1,10 @@
+{
+  "name": "oc-agent-demo-target",
+  "version": "0.1.0",
+  "description": "Demo target repo for OpenComputer background agents.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
