@@ -18,9 +18,14 @@ export function parseDuration(input) {
     throw new TypeError("parseDuration: expected a non-empty string");
   }
 
-  const re = /(\d+)\s*([a-z])/gi;
+  // Sticky regex: each match must start exactly where the previous one ended,
+  // so the *entire* string has to be a sequence of valid "<number><unit>"
+  // parts. This rejects garbage like "1hello", "5s nope", or "1.5h" instead
+  // of silently parsing a subset of it.
+  const re = /\s*(\d+)\s*([a-z])\s*/giy;
   let total = 0;
   let matched = false;
+  let pos = 0;
   let m;
   while ((m = re.exec(input)) !== null) {
     const value = Number(m[1]);
@@ -31,10 +36,11 @@ export function parseDuration(input) {
     }
     total += value * ms;
     matched = true;
+    pos = re.lastIndex;
   }
 
-  if (!matched) {
-    throw new RangeError(`parseDuration: no duration found in "${input}"`);
+  if (!matched || pos !== input.length) {
+    throw new RangeError(`parseDuration: invalid duration "${input}"`);
   }
   return total;
 }
