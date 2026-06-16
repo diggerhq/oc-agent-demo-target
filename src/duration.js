@@ -18,23 +18,27 @@ export function parseDuration(input) {
     throw new TypeError("parseDuration: expected a non-empty string");
   }
 
-  const re = /(\d+)\s*([a-z])/gi;
+  // Sticky regex: each match must start exactly where the previous one ended,
+  // so the whole string has to be a sequence of "<number><unit>" parts.
+  // Anything left over (decimals, signs, stray words) is rejected rather than
+  // silently dropped.
+  const re = /(\d+)\s*([a-z])\s*/giy;
+  const trimmed = input.trim();
   let total = 0;
-  let matched = false;
+  let pos = 0;
   let m;
-  while ((m = re.exec(input)) !== null) {
-    const value = Number(m[1]);
+  while ((m = re.exec(trimmed)) !== null) {
     const unit = m[2].toLowerCase();
     const ms = UNITS[unit];
     if (ms === undefined) {
       throw new RangeError(`parseDuration: unknown unit "${unit}"`);
     }
-    total += value * ms;
-    matched = true;
+    total += Number(m[1]) * ms;
+    pos = re.lastIndex;
   }
 
-  if (!matched) {
-    throw new RangeError(`parseDuration: no duration found in "${input}"`);
+  if (pos !== trimmed.length) {
+    throw new RangeError(`parseDuration: invalid duration "${input}"`);
   }
   return total;
 }
