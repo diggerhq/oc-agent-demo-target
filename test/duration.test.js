@@ -6,11 +6,13 @@ test("parses single units", () => {
   assert.equal(parseDuration("45s"), 45_000);
   assert.equal(parseDuration("10m"), 600_000);
   assert.equal(parseDuration("2h"), 7_200_000);
+  assert.equal(parseDuration("1w"), 604_800_000);
 });
 
 test("parses combined units", () => {
   assert.equal(parseDuration("1h30m"), 5_400_000);
   assert.equal(parseDuration("1h30m15s"), 5_415_000);
+  assert.equal(parseDuration("2w1h"), 1_213_200_000);
 });
 
 test("rejects bad input", () => {
