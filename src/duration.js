@@ -1,14 +1,12 @@
 // Parse a human-readable duration like "1h30m" or "45s" into milliseconds.
 //
-// Supported units: s (seconds), m (minutes), h (hours), d (days), w (weeks).
+// Supported units: s (seconds), m (minutes), h (hours).
 // A string may combine several parts, e.g. "1h30m15s".
 
 const UNITS = {
   s: 1_000,
   m: 60_000,
   h: 3_600_000,
-  d: 86_400_000,
-  w: 604_800_000,
 };
 
 /**
