@@ -1,16 +1,17 @@
 # oc-agent-demo-target
 
 A tiny, dependency-free library — `src/duration.js` parses durations like
-`"1h30m"` into milliseconds — used as a **target repo** for OpenComputer
-background agents: a place to watch an agent resolve a real issue and open a PR.
+`"1h30m"` (units `s`, `m`, `h`, `d`, `w`) into milliseconds — used as a
+**target repo** for OpenComputer background agents: a place to watch an agent
+resolve a real issue and open a PR.
 
 ## Get an issue resolved
 
 This repo has the OpenComputer GitHub App installed and an agent watching it.
 To see it work:
 
-1. **Open an issue** describing a small change — e.g. *"Add a weeks unit (`w`) to
-   parseDuration."*
+1. **Open an issue** describing a small change — e.g. *"Add a years unit (`y`)
+   to parseDuration."*
 2. **Add the `agent` label.**
 3. In a minute or two the agent checks the repo out in a sandbox, makes the
    change, runs `npm test`, and opens a **draft PR** linked to your issue —
